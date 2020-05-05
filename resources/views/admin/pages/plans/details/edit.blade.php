@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', "Editar o Plano: : { $plan->name }")
+@section('title', "Editar detalhe do {$plan->name}")
 
 @section('content_header')
 <div class="card-header">
@@ -8,14 +8,16 @@
         <nav aria-label="breadcrumb" class="ml-auto">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Planos</a></li>
+                <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Plano</a></li>
+                <li class="breadcrumb-item"><a href="{{route('plans.show', $plan->url)}}">{{$plan->name}}</a></li>
+                <li class="breadcrumb-item"><a href="{{route('details.plan.index', $plan->url)}}">Detalhes</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>
         </nav>
     </div>
 
     <h1 class="m-0 text-dark">
-        Editar : <b>{{ $plan->name }}</b>
+        Editar detalhe do {{$plan->name}}
     </h1>
 
 </div>
@@ -24,13 +26,13 @@
 
 @section('content')
 
+
 <div class="card">
 
     <div class="card-body">
 
-        {{ Form::model($plan, ['route' =>['plans.update', $plan->url], 'method'=>'PUT', 'class' => 'form'])}}
-
-        @include('admin.pages.plans._Partials.form')
+        {{ Form::model($detail, ['route' => ['details.plan.update', $plan->url, $detail->id], 'method' =>'PUT']) }}
+        @include('admin.pages.plans.details._Partials.form')
 
         {{ Form::close() }}
     </div>

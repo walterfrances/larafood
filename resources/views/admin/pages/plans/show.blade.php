@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Detalhes do Plano: <b>{{ $plan->name }}</b>')
+@section('title', "Detalhes do Plano: { $plan->name }")
 
 @section('content_header')
 
@@ -14,35 +14,38 @@
             </ol>
         </nav>
     </div>
-    
+
     <h1 class="m-0 text-dark">
-    Planos: <b>{{ $plan->name }}</b>
+        Planos: <b>{{ $plan->name }}</b>
     </h1>
 
 </div>
+
+@include('includes.alerts')
+
 @stop
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    
-                    <p><strong>Nome: </strong>{{$plan->name}}</p>
-                    <p><strong>URL: </strong>{{$plan->url}}</p>
-                    <p><strong>Preço: </strong>{{number_format($plan->price, 2, ',', '.')}}</p>
-                    <p><strong>Descrição: </strong>{{$plan->Description}}</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
 
-                    <hr>
+                <ul><li><strong>Nome: </strong>{{$plan->name}}</li></ul>
+                <ul><li><strong>URL: </strong>{{$plan->url}}</li></ul>
+                <ul><li><strong>Preço: </strong>{{number_format($plan->price, 2, ',', '.')}}</li></ul>
+                <ul><li><strong>Descrição: </strong>{{$plan->Description}}</li></ul>
 
-                    {{ Form::open(['route'=>['plans.destroy', $plan->url], 'method'=>'DELETE']) }}
+                <hr>
 
-                    {{ Form::submit('Eliminar', ['class' => 'btn btn-danger']) }}
+                {{ Form::open(['route'=>['plans.destroy', $plan->url], 'method'=>'DELETE']) }}
 
-                    {{ Form::close() }}
-            
-                </div>
+                {{ Form::submit('Eliminar', ['class' => 'btn btn-danger']) }}
+
+                {{ Form::close() }}
+
             </div>
         </div>
     </div>
+</div>
 @stop
