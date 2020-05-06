@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', 'Permissões')
 
 @section('content_header')
 
@@ -9,18 +9,18 @@
         <nav aria-label="breadcrumb" class="ml-auto">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Planos</li>
+                <li class="breadcrumb-item active" aria-current="page">Permissões</li>
             </ol>
         </nav>
     </div>
 
     <h1 class="m-0 text-dark">
         <span>
-            <a href="{{ route('plans.create') }}" class="text-dark">
+            <a href="{{ route('permissions.create') }}" class="text-dark">
                 <i class="fas fa-plus fa-1x" aria-hidden="true"></i>
             </a>
         </span>
-        Planos
+        Permissões
     </h1>
 
 </div>
@@ -32,10 +32,10 @@
 <div class="card">
     <div class="card-header">
     @include('includes.alerts')
-        {{ Form::open(['route'=>'plans.search'],['class' => 'form form-inline']) }}
+        {{ Form::open(['route'=>'permissions.search'],['class' => 'form form-inline']) }}
         <div class="input-group col-3">
 
-            {{ Form::text('filter', $filters['filter'] ?? null , ['class' => 'form-control', 'placeholder' => 'Nome']) }}
+            {{ Form::text('filter', $filters['filter'] ?? null , ['class' => 'form-control', 'placeholder' => 'Procurar']) }}
 
             <div class="input-group-append">
                 {{ Form::button('<i class="fa fa-search"></i>', ['type' => 'submit', 'class' => 'btn btn-success btn-sm'] )  }}
@@ -45,7 +45,7 @@
         </div>
 
         @if(isset($filters))
-        <a href="{{ route('plans.index') }}">(X) Limpar os filtros</a>
+        <a href="{{ route('permissions.index') }}">(X) Limpar os filtros</a>
         @endif
     </div>
 
@@ -54,24 +54,23 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Preços</th>
+                    <th>Descrição</th>
                     <th width="250">Acções</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($plans as $plan)
+                @foreach($permissions as $permission)
                 <tr>
                     <td>
-                        {{$plan->name}}
+                        {{$permission->name}}
                     </td>
                     <td>
-                        {{ number_format($plan->price, 2, ',', '.')}}
+                        {{$permission->description}}
                     </td>
                     <td>
-                        <a href="{{ route('plans.modules', $plan->id) }}" class="btn btn-info btn-sm"><i class="fas fa-address-book"></i></a>
-                        <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-info btn-sm"><i class="fas fa-info-circle"></i></a>
-                        <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info btn-sm"><i class="fa fa-edit" ></i></a>
-                        <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye" ></i></a>
+                        <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit" ></i></a>
+                        <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye" ></i></a>
+                        <a href="{{ route('permissions.modules', $permission->id) }}" class="btn btn-info btn-sm"><i class="fa fa-address-book" ></i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -82,9 +81,9 @@
 
     <div class="card-footer">
         @if(isset($filters))
-        {{ $plans->appends($filters)->links() }}
+        {{ $permissions->appends($filters)->links() }}
         @else
-        {{ $plans->links() }}
+        {{ $permissions->links() }}
         @endif
 
         

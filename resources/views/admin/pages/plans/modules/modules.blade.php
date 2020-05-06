@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', "Módulos do {$plan->name}")
 
 @section('content_header')
 
@@ -9,18 +9,19 @@
         <nav aria-label="breadcrumb" class="ml-auto">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Planos</li>
+                <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Planos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Módulos</li>
             </ol>
         </nav>
     </div>
 
     <h1 class="m-0 text-dark">
         <span>
-            <a href="{{ route('plans.create') }}" class="text-dark">
+            <a href="{{ route('plans.modules.available', $plan->id) }}" class="text-dark">
                 <i class="fas fa-plus fa-1x" aria-hidden="true"></i>
             </a>
         </span>
-        Planos
+        Módulos do <b>{{$plan->name}}</b>
     </h1>
 
 </div>
@@ -31,11 +32,13 @@
 
 <div class="card">
     <div class="card-header">
+        
     @include('includes.alerts')
-        {{ Form::open(['route'=>'plans.search'],['class' => 'form form-inline']) }}
+
+        {{ Form::open(['route'=>['plans.modules.available', $plan->id],'class' => 'form form-inline']) }}
         <div class="input-group col-3">
 
-            {{ Form::text('filter', $filters['filter'] ?? null , ['class' => 'form-control', 'placeholder' => 'Nome']) }}
+            {{ Form::text('filter', $filters['filter'] ?? null , ['class' => 'form-control', 'placeholder' => 'Procurar']) }}
 
             <div class="input-group-append">
                 {{ Form::button('<i class="fa fa-search"></i>', ['type' => 'submit', 'class' => 'btn btn-success btn-sm'] )  }}
@@ -45,7 +48,7 @@
         </div>
 
         @if(isset($filters))
-        <a href="{{ route('plans.index') }}">(X) Limpar os filtros</a>
+        <a href="{{ route('plans.modules.available', $plan->id) }}">(X) Limpar os filtros</a>
         @endif
     </div>
 
@@ -54,24 +57,21 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Preços</th>
-                    <th width="250">Acções</th>
+                    <th>Descrição</th>
+                    <th width="150">Acções</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($plans as $plan)
+                @foreach($modules as $module)
                 <tr>
                     <td>
-                        {{$plan->name}}
+                        {{$module->name}}
                     </td>
                     <td>
-                        {{ number_format($plan->price, 2, ',', '.')}}
+                        {{$module->description}}
                     </td>
                     <td>
-                        <a href="{{ route('plans.modules', $plan->id) }}" class="btn btn-info btn-sm"><i class="fas fa-address-book"></i></a>
-                        <a href="{{ route('details.plan.index', $plan->url) }}" class="btn btn-info btn-sm"><i class="fas fa-info-circle"></i></a>
-                        <a href="{{ route('plans.edit', $plan->url) }}" class="btn btn-info btn-sm"><i class="fa fa-edit" ></i></a>
-                        <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye" ></i></a>
+                        <a href="{{ route('plans.modules.detach', [$plan->id, $module->id]) }}" class="btn btn-danger btn-sm"><i class="far fa-window-close"> Desvincular</i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -82,9 +82,9 @@
 
     <div class="card-footer">
         @if(isset($filters))
-        {{ $plans->appends($filters)->links() }}
+        {{ $modules->appends($filters)->links() }}
         @else
-        {{ $plans->links() }}
+        {{ $modules->links() }}
         @endif
 
         

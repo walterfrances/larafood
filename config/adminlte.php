@@ -167,7 +167,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
@@ -208,6 +208,7 @@ return [
     */
 
     'menu' => [
+        ['header' => 'main_navigation'],
         [
             'text' => 'search',
             'search' => true,
@@ -220,11 +221,17 @@ return [
            // 'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Módulos',
+            'url'         => 'admin/modules',
+            'icon'        => 'fas fa-address-book',
+            //'label'       => 4,
+            //'label_color' => 'success',
+        ],
+        [
+            'text' => 'Permissões',
+            'url'  => 'admin/permissions',
+            'icon' => 'fas fa-lock',
+           // 'can'  => 'manage-blog',
         ],
         ['header' => 'account_settings'],
         [
