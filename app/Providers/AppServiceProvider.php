@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Plan;
+use App\Models\Tenant;
 use App\Observers\PlanObserver;
+use App\Observers\TenantObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Plan::observe(PlanObserver::class); // importar o Observer que cria e actualiza a URL automaticamente
+        Tenant::observe(TenantObserver::class); // importar o Observer que cria e actualiza a URL e UUID automaticamente
     }
 }

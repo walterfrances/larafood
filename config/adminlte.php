@@ -208,31 +208,32 @@ return [
     */
 
     'menu' => [
-        ['header' => 'main_navigation'],
         [
             'text' => 'search',
             'search' => true,
-            'topnav' => true,
+            'topnav' => true
         ],
         [
             'text' => 'Planos',
             'url'  => 'admin/plans',
-            'icon' => 'fas fa-list-alt',
-           // 'can'  => 'manage-blog',
+            'icon' => 'fas fa-list-alt'
         ],
         [
             'text'        => 'Módulos',
             'url'         => 'admin/modules',
-            'icon'        => 'fas fa-address-book',
-            //'label'       => 4,
-            //'label_color' => 'success',
+            'icon'        => 'fas fa-address-book'
         ],
         [
             'text' => 'Permissões',
             'url'  => 'admin/permissions',
-            'icon' => 'fas fa-lock',
-           // 'can'  => 'manage-blog',
+            'icon' => 'fas fa-lock'
         ],
+        [
+            'text' => 'Utilizadores',
+            'url'  => 'admin/users',
+            'icon' => 'fas fa-users'
+        ],
+        
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

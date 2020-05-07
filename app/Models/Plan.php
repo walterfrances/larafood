@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class plan extends Model
+class Plan extends Model
 {
     protected $fillable =['name', 'url', 'price', 'Description'];
 
@@ -23,6 +23,14 @@ class plan extends Model
     public function modules()
     {
         return $this->belongsToMany(Module::class);
+    }
+
+    /**
+     * Get de Tenants
+     */
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
     }
 
     /**

@@ -3,6 +3,8 @@
 return [
 
     'full_name'                   => 'Full name',
+    'full_name_company'           => 'Company',
+    'nif'                         => 'VAT',
     'email'                       => 'Email',
     'password'                    => 'Password',
     'retype_password'             => 'Retype password',
