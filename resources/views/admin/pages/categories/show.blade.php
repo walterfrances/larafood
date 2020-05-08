@@ -31,9 +31,9 @@
         <div class="card">
             <div class="card-body">
                 
-                <ul><li><strong>Empresa: </strong>{{$category->tenant->name}}</li></ul>
-                <ul><li><strong>Nome: </strong>{{$category->name}}</li></ul>
-                <ul><li><strong>E-mail: </strong>{{$category->email}}</li></ul>
+                <ul><li><strong>Empresa: </strong>{{$category->name}}</li></ul>
+                <ul><li><strong>Nome: </strong>{{$category->url}}</li></ul>
+                <ul><li><strong>E-mail: </strong>{{$category->description}}</li></ul>
 
                 <hr>
 

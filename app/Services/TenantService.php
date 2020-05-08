@@ -14,28 +14,32 @@ class TenantService
             $this->data = $data;
     
             $tenant = $this->storeTenant();
-    
+            
             $user = $this->storeUser($tenant);
-    
+
             return $user;
         }
     
         public function storeTenant()
         {
+            
             $data = $this->data;
     
-            return $this->plan->tenants()->create([
+            $tenant = $this->plan->tenants()->create([
                 'nif'   => $data['nif'],
                 'name'  => $data['empresa'],
                 'email' => $data['email'],
-    
+   
                 'subscription'  => now(),
                 'expires_at'    => now()->addDays(7),
             ]);
+            
+            dd($tenant);
         }
     
         public function storeUser($tenant)
         {
+
             $user = $tenant->users()->create([
                 'name'      => $this->data['name'],
                 'email'     => $this->data['email'],
