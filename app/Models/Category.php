@@ -2,22 +2,13 @@
 
 namespace App\Models;
 
-use App\Observers\TenantObserver;
+use App\Tenant\Traits\TenantTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['name','url','description'];
+    use TenantTrait;
 
-         /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::observe(TenantObserver::class);
-    
-    }
+    protected $fillable = ['name','url','description'];
 
 }
