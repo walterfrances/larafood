@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Utilizadores')
+@section('title', 'Categorias')
 
 @section('content_header')
 
@@ -9,18 +9,18 @@
         <nav aria-label="breadcrumb" class="ml-auto">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Utilizadores</li>
+                <li class="breadcrumb-item active" aria-current="page">Categorias</li>
             </ol>
         </nav>
     </div>
 
     <h1 class="m-0 text-dark">
         <span>
-            <a href="{{ route('users.create') }}" class="text-dark">
+            <a href="{{ route('categories.create') }}" class="text-dark">
                 <i class="fas fa-plus fa-1x" aria-hidden="true"></i>
             </a>
         </span>
-        Utilizadores
+        Categorias
     </h1>
 
 </div>
@@ -32,7 +32,7 @@
 <div class="card">
     <div class="card-header">
     @include('includes.alerts')
-        {{ Form::open(['route'=>'users.search'],['class' => 'form form-inline']) }}
+        {{ Form::open(['route'=>'categories.search'],['class' => 'form form-inline']) }}
         <div class="input-group col-3">
 
             {{ Form::text('filter', $filters['filter'] ?? null , ['class' => 'form-control', 'placeholder' => 'Procurar']) }}
@@ -45,7 +45,7 @@
         </div>
 
         @if(isset($filters))
-        <a href="{{ route('users.index') }}">(X) Limpar os filtros</a>
+        <a href="{{ route('categories.index') }}">(X) Limpar os filtros</a>
         @endif
     </div>
 
@@ -54,22 +54,22 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>E-mail</th>
+                    <th>Descrição</th>
                     <th width="150">Acções</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
+                @foreach($categories as $categor)
                 <tr>
                     <td>
-                        {{$user->name}}
+                        {{$categor->name}}
                     </td>
                     <td>
-                        {{$user->email}}
+                        {{$categor->description}}
                     </td>
                     <td>
-                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit" ></i></a>
-                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye" ></i></a>
+                        <a href="{{ route('categories.edit', $categor->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit" ></i></a>
+                        <a href="{{ route('categories.show', $categor->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-eye" ></i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -80,9 +80,9 @@
 
     <div class="card-footer">
         @if(isset($filters))
-        {{ $users->appends($filters)->links() }}
+        {{ $categories->appends($filters)->links() }}
         @else
-        {{ $users->links() }}
+        {{ $categories->links() }}
         @endif
 
         
